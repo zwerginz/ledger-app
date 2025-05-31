@@ -1,12 +1,7 @@
 import Database from '@tauri-apps/plugin-sql';
 
 export enum AccountType {
-  Checking = 'checking',
-  Savings = 'savings',
-  Credit = 'credit',
-  Investment = 'investment',
-  Cash = 'cash',
-  Other = 'other'
+  Checking = 'checking'
 }
 
 export interface Account {
@@ -77,26 +72,14 @@ class DatabaseService {
   async getAccounts(): Promise<Account[]> {
     if (!this.db) await this.initialize();
     try {
-      const result = await this.db!.select<Account[]>('SELECT * FROM accounts ORDER BY name');
-      return result;
+      return await this.db!.select<Account[]>('SELECT * FROM accounts ORDER BY name');
     } catch (error) {
       console.error('Failed to get accounts:', error);
       throw new Error('Failed to get accounts: ' + (error instanceof Error ? error.message : String(error)));
     }
   }
   
-  async getAccountById(id: number): Promise<Account | null> {
-    if (!this.db) await this.initialize();
-    try {
-      const accounts = await this.db!.select<Account[]>('SELECT * FROM accounts WHERE id = ?', [id]);
-      return accounts.length > 0 ? accounts[0] : null;
-    } catch (error) {
-      console.error(`Failed to get account with ID ${id}:`, error);
-      throw new Error(`Failed to get account with ID ${id}: ` + (error instanceof Error ? error.message : String(error)));
-    }
-  }
-  
-  async createAccount(account: Omit<Account, 'id' | 'createdAt'>): Promise<number> {
+  async createAccount(account: Omit<Account, 'id' | 'createdAt'>): Promise<number | undefined> {
     if (!this.db) await this.initialize();
     try {
       const result = await this.db!.execute(
@@ -115,49 +98,6 @@ class DatabaseService {
       throw new Error('Failed to create account: ' + (error instanceof Error ? error.message : String(error)));
     }
   }
-  
-  async updateAccount(id: number, account: Partial<Account>): Promise<void> {
-    if (!this.db) await this.initialize();
-    try {
-      const currentAccount = await this.getAccountById(id);
-      if (!currentAccount) throw new Error(`Account with ID ${id} not found`);
-      
-      await this.db!.execute(
-        `UPDATE accounts SET 
-          name = ?, 
-          accountType = ?, 
-          balance = ?, 
-          currency = ?, 
-          description = ? 
-        WHERE id = ?`,
-        [
-          account.name ?? currentAccount.name,
-          account.accountType ?? currentAccount.accountType,
-          account.balance ?? currentAccount.balance,
-          account.currency ?? currentAccount.currency,
-          account.description ?? currentAccount.description,
-          id
-        ]
-      );
-    } catch (error) {
-      console.error(`Failed to update account with ID ${id}:`, error);
-      throw new Error(`Failed to update account with ID ${id}: ` + (error instanceof Error ? error.message : String(error)));
-    }
-  }
-  
-  async updateAccountBalance(id: number, newBalance: number): Promise<void> {
-    if (!this.db) await this.initialize();
-    try {
-      await this.db!.execute(
-        'UPDATE accounts SET balance = ? WHERE id = ?',
-        [newBalance, id]
-      );
-    } catch (error) {
-      console.error(`Failed to update balance for account with ID ${id}:`, error);
-      throw new Error(`Failed to update balance for account with ID ${id}: ` + (error instanceof Error ? error.message : String(error)));
-    }
-  }
-  
   async deleteAccount(id: number): Promise<void> {
     if (!this.db) await this.initialize();
     try {
