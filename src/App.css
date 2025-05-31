@@ -1,18 +1,35 @@
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
+:root[data-theme="light"] {
+  --text-color: #0f0f0f;
+  --background-color: #f6f6f6;
+  --link-color: #646cff;
+  --link-hover-color: #535bf2;
+  --button-text-color: #0f0f0f;
+  --button-background-color: #ffffff;
+  --button-active-background: #e8e8e8;
+  --input-background: #ffffff;
+  --border-active-color: #396cd8;
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
+:root[data-theme="dark"] {
+  --text-color: #f6f6f6;
+  --background-color: #2f2f2f;
+  --link-color: #646cff;
+  --link-hover-color: #24c8db;
+  --button-text-color: #ffffff;
+  --button-background-color: #0f0f0f98;
+  --button-active-background: #0f0f0f69;
+  --input-background: #0f0f0f98;
+  --border-active-color: #396cd8;
 }
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -41,6 +58,14 @@
   filter: drop-shadow(0 0 2em #24c8db);
 }
 
+.logo.vite:hover {
+  filter: drop-shadow(0 0 2em #747bff);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafb);
+}
+
 .row {
   display: flex;
   justify-content: center;
@@ -48,12 +73,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--link-color);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--link-hover-color);
 }
 
 h1 {
@@ -68,8 +93,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
   transition: border-color 0.25s;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -79,11 +104,12 @@ button {
 }
 
 button:hover {
-  border-color: #396cd8;
+  border-color: var(--border-active-color);
 }
+
 button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
+  border-color: var(--border-active-color);
+  background-color: var(--button-active-background);
 }
 
 input,
@@ -95,22 +121,62 @@ button {
   margin-right: 5px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
+/* Theme toggle button */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: var(--text-color);
+  transition: background-color 0.3s;
+}
 
-  a:hover {
-    color: #24c8db;
-  }
+.theme-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-  button:active {
-    background-color: #0f0f0f69;
-  }
+.theme-toggle[data-theme="dark"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+/* Add these styles to your existing App.css file */
+.card {
+  margin: 1rem 0;
+}
+
+.accounts-list {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--button-background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accounts-list h2 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.accounts-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accounts-list li {
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }

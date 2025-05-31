@@ -1,35 +1,23 @@
-import { useState } from 'react';
-import { invoke } from '@tauri-apps/api/core';
+import { useTheme } from "./context/ThemeContext";
+import AccountManagement from './components/AccountManagement';
 
 function App() {
-    const [accounts, setAccounts] = useState<string[]>([]);
-    const [loading, setLoading] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
-    const fetchAccounts = async () => {
-        setLoading(true);
-        try {
-            const result = await invoke<string[]>('get_accounts');
-            setAccounts(result);
-        } catch (err) {
-            console.error('Failed to fetch accounts:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <div style={{ padding: '2rem' }}>
-            <h1>Account Viewer</h1>
-            <button onClick={fetchAccounts} disabled={loading}>
-                {loading ? 'Loading...' : 'Get Accounts'}
-            </button>
-            <ul>
-                {accounts.map((acc, i) => (
-                    <li key={i}>{acc}</li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div className="container">
+      <button 
+        className="theme-toggle" 
+        onClick={toggleTheme}
+        data-theme={theme}
+        aria-label="Toggle theme"
+      >
+        {theme === 'light' ? '🌙' : '☀️'}
+      </button>
+      
+      <AccountManagement />
+    </div>
+  );
 }
 
 export default App;
