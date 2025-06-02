@@ -9,7 +9,7 @@
 /dist/
 
 # Environment files (API keys, secrets)
-.env
+src-tauri/.env
 .env.*
 
 # JetBrains IDE (WebStorm, IntelliJ, RustRover, CLion)
