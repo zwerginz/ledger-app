@@ -84,7 +84,6 @@ const AccountForm: React.FC<AccountFormProps> = ({ onAccountCreated }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isLoading}
-            rows={3}
             style={{ width: '100%', padding: '8px' }}
           />
         </div>
