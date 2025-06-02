@@ -1,0 +1,62 @@
+{
+  "db_name": "SQLite",
+  "query": "\n        SELECT\n            id,\n            name,\n            account_type,\n            balance,\n            currency,\n            description,\n            created_at as \"created_at: _\", -- Use AS to help sqlx infer DateTime<Utc>\n            updated_at as \"updated_at: _\"  -- Use AS to help sqlx infer DateTime<Utc>\n        FROM accounts\n        ",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer"
+      },
+      {
+        "name": "name",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "account_type",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "balance",
+        "ordinal": 3,
+        "type_info": "Float"
+      },
+      {
+        "name": "currency",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at: _",
+        "ordinal": 6,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at: _",
+        "ordinal": 7,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "b329f97f3b30dc25050efa6e2340445ae91200f36bcd2a2aa9bf9c65aebf8daa"
+}
