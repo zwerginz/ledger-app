@@ -1,0 +1,62 @@
+{
+  "db_name": "SQLite",
+  "query": "\n        SELECT\n            id,\n            name,\n            account_type,\n            balance,\n            currency,\n            description,\n            created_at,\n            updated_at\n        FROM accounts\n        ",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Integer"
+      },
+      {
+        "name": "name",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "account_type",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "balance",
+        "ordinal": 3,
+        "type_info": "Float"
+      },
+      {
+        "name": "currency",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at",
+        "ordinal": 6,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at",
+        "ordinal": 7,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "43819d788989fed48c36d49a236467f598638f3d2e3819e5cb5f2630f8597b89"
+}

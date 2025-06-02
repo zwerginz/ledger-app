@@ -32,3 +32,4 @@ yarn-error.log*
 
 # Build cache folders
 .cache/
+/identifier.sqlite
